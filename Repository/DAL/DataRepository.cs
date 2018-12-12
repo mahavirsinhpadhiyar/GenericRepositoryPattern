@@ -187,6 +187,22 @@ namespace Repository.DAL
         }
 
         /// <summary>
+        /// Remove single record
+        /// </summary>
+        /// <param name="item">record to be removed</param>
+        /// <returns>returns true if record gets added successfully else false</returns>
+        public async Task<bool> RemoveAsync(T item)
+        {
+            using (var context = new SpotlightEntities())
+            {
+                context.Entry(item).State = EntityState.Deleted;
+                var count = await context.SaveChangesAsync();
+
+                return count == 1;
+            }
+        }
+
+        /// <summary>
         /// Example how to use this method
         /// await department.GetQueryDataAsync(i => i.Id == Id);
         /// </summary>
@@ -200,7 +216,7 @@ namespace Repository.DAL
                 context.Entry(item).State = EntityState.Deleted;
                 var count = await context.SaveChangesAsync();
 
-                return count == 1;
+                return count > 0;
             }
         }
 
