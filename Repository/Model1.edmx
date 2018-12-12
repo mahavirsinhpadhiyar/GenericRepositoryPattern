@@ -1,0 +1,1113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SpotlightModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="200" />
+          <Property Name="CompanyAddressLine" Type="varchar" MaxLength="200" />
+          <Property Name="CompanyCity" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyProvinceId" Type="int" />
+          <Property Name="CompanyPostalCode" Type="varchar" MaxLength="10" />
+          <Property Name="CompanyPhone" Type="varchar" MaxLength="20" />
+          <Property Name="CompanyEmail" Type="varchar" MaxLength="200" />
+          <Property Name="SpendingAmountBalance" Type="money" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="DailyKPITransaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TransDate" Type="date" />
+          <Property Name="KPIID" Type="uniqueidentifier" />
+          <Property Name="PerformanceNumber" Type="decimal" Precision="16" Scale="2" />
+        </EntityType>
+        <EntityType Name="DepartmentEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepartmentId" Type="uniqueidentifier" />
+          <Property Name="EmployeeId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DivisionId" Type="uniqueidentifier" />
+          <Property Name="Department" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Divisions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Division" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmployeeFirstName" Type="varchar" MaxLength="100" />
+          <Property Name="EmployeeMiddleInitial" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmployeeLastName" Type="varchar" MaxLength="100" />
+          <Property Name="EmployeeEmail" Type="varchar" MaxLength="200" />
+          <Property Name="PeopleJobTitleId" Type="uniqueidentifier" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobTitles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KPIs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StrategicObjectiveId" Type="uniqueidentifier" />
+          <Property Name="KPI" Type="varchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageFullName" Type="varchar" MaxLength="50" />
+          <Property Name="LanguageCultureName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PerformanceIndicator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamId" Type="uniqueidentifier" />
+          <Property Name="KPIId" Type="uniqueidentifier" />
+          <Property Name="Target" Type="numeric" Precision="18" Scale="4" />
+        </EntityType>
+        <EntityType Name="PerformanceInitiative">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DeptId" Type="uniqueidentifier" />
+          <Property Name="PerformanceInitiativeName" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StrategicObjectives">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PerformanceInitiativeId" Type="uniqueidentifier" />
+          <Property Name="StrategicObjectives" Type="varchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Targets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamId" Type="uniqueidentifier" />
+          <Property Name="KPIID" Type="uniqueidentifier" />
+          <Property Name="Target" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="UOMId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="TeamManagement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="250" />
+          <Property Name="DepartmentId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamMembers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamId" Type="uniqueidentifier" />
+          <Property Name="EmployeeId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepartmentId" Type="uniqueidentifier" />
+          <Property Name="TeamName" Type="varchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="UOMs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UOM" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmployeeId" Type="uniqueidentifier" />
+          <Property Name="UserName" Type="varchar" MaxLength="200" />
+          <Property Name="UserFirstName" Type="varchar" MaxLength="100" />
+          <Property Name="UserLastName" Type="varchar" MaxLength="100" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="200" />
+          <Property Name="LanguageId" Type="uniqueidentifier" />
+          <Property Name="RoleId" Type="uniqueidentifier" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Departmen__Depar__59FA5E80">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="DepartmentEmployee" Type="Self.DepartmentEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentEmployee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Divis__5BE2A6F2">
+          <End Role="Divisions" Type="Self.Divisions" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="DivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Emplo__5AEE82B9">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="DepartmentEmployee" Type="Self.DepartmentEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__People__5CD6CB2B">
+          <End Role="JobTitles" Type="Self.JobTitles" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="PeopleJobTitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Performan__DeptI__60A75C0F">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="PerformanceInitiative" Type="Self.PerformanceInitiative" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PerformanceInitiative">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Strategic__Perfo__619B8048">
+          <End Role="PerformanceInitiative" Type="Self.PerformanceInitiative" Multiplicity="0..1" />
+          <End Role="StrategicObjectives" Type="Self.StrategicObjectives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PerformanceInitiative">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StrategicObjectives">
+              <PropertyRef Name="PerformanceInitiativeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeamMembe__Emplo__6383C8BA">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMembers">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeamMembe__TeamI__6477ECF3">
+          <End Role="TeamManagement" Type="Self.TeamManagement" Multiplicity="0..1" />
+          <End Role="TeamMembers" Type="Self.TeamMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamManagement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMembers">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__EmployeeI__656C112C">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__66603565">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KPIs_StrategicObjectives">
+          <End Role="StrategicObjectives" Type="Self.StrategicObjectives" Multiplicity="0..1" />
+          <End Role="KPIs" Type="Self.KPIs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StrategicObjectives">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KPIs">
+              <PropertyRef Name="StrategicObjectiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerformanceIndicator_KPIs">
+          <End Role="KPIs" Type="Self.KPIs" Multiplicity="0..1" />
+          <End Role="PerformanceIndicator" Type="Self.PerformanceIndicator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KPIs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PerformanceIndicator">
+              <PropertyRef Name="KPIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerformanceIndicator_TeamManagement">
+          <End Role="TeamManagement" Type="Self.TeamManagement" Multiplicity="0..1" />
+          <End Role="PerformanceIndicator" Type="Self.PerformanceIndicator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamManagement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PerformanceIndicator">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamManagement_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="TeamManagement" Type="Self.TeamManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamManagement">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpotlightModelStoreContainer">
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyKPITransaction" EntityType="Self.DailyKPITransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmentEmployee" EntityType="Self.DepartmentEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Divisions" EntityType="Self.Divisions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobTitles" EntityType="Self.JobTitles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KPIs" EntityType="Self.KPIs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerformanceIndicator" EntityType="Self.PerformanceIndicator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerformanceInitiative" EntityType="Self.PerformanceInitiative" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StrategicObjectives" EntityType="Self.StrategicObjectives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Targets" EntityType="Self.Targets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamManagement" EntityType="Self.TeamManagement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamMembers" EntityType="Self.TeamMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UOMs" EntityType="Self.UOMs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Departmen__Depar__59FA5E80" Association="Self.FK__Departmen__Depar__59FA5E80">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="DepartmentEmployee" EntitySet="DepartmentEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Divis__5BE2A6F2" Association="Self.FK__Departmen__Divis__5BE2A6F2">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Emplo__5AEE82B9" Association="Self.FK__Departmen__Emplo__5AEE82B9">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DepartmentEmployee" EntitySet="DepartmentEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__People__5CD6CB2B" Association="Self.FK__Employee__People__5CD6CB2B">
+            <End Role="JobTitles" EntitySet="JobTitles" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Performan__DeptI__60A75C0F" Association="Self.FK__Performan__DeptI__60A75C0F">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="PerformanceInitiative" EntitySet="PerformanceInitiative" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Strategic__Perfo__619B8048" Association="Self.FK__Strategic__Perfo__619B8048">
+            <End Role="PerformanceInitiative" EntitySet="PerformanceInitiative" />
+            <End Role="StrategicObjectives" EntitySet="StrategicObjectives" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamMembe__Emplo__6383C8BA" Association="Self.FK__TeamMembe__Emplo__6383C8BA">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamMembe__TeamI__6477ECF3" Association="Self.FK__TeamMembe__TeamI__6477ECF3">
+            <End Role="TeamManagement" EntitySet="TeamManagement" />
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__EmployeeI__656C112C" Association="Self.FK__Users__EmployeeI__656C112C">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__66603565" Association="Self.FK__Users__RoleId__66603565">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KPIs_StrategicObjectives" Association="Self.FK_KPIs_StrategicObjectives">
+            <End Role="StrategicObjectives" EntitySet="StrategicObjectives" />
+            <End Role="KPIs" EntitySet="KPIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerformanceIndicator_KPIs" Association="Self.FK_PerformanceIndicator_KPIs">
+            <End Role="KPIs" EntitySet="KPIs" />
+            <End Role="PerformanceIndicator" EntitySet="PerformanceIndicator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerformanceIndicator_TeamManagement" Association="Self.FK_PerformanceIndicator_TeamManagement">
+            <End Role="TeamManagement" EntitySet="TeamManagement" />
+            <End Role="PerformanceIndicator" EntitySet="PerformanceIndicator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamManagement_Departments" Association="Self.FK_TeamManagement_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="TeamManagement" EntitySet="TeamManagement" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpotlightModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyAddressLine" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyCity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyProvinceId" Type="Int32" />
+          <Property Name="CompanyPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SpendingAmountBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DailyKPITransaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TransDate" Type="DateTime" Precision="0" />
+          <Property Name="KPIID" Type="Guid" />
+          <Property Name="PerformanceNumber" Type="Decimal" Precision="16" Scale="2" />
+        </EntityType>
+        <EntityType Name="DepartmentEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepartmentId" Type="Guid" />
+          <Property Name="EmployeeId" Type="Guid" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Departmen__Depar__59FA5E80" FromRole="DepartmentEmployee" ToRole="Departments" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Departmen__Emplo__5AEE82B9" FromRole="DepartmentEmployee" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DivisionId" Type="Guid" />
+          <Property Name="Department1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DepartmentEmployees" Relationship="Self.FK__Departmen__Depar__59FA5E80" FromRole="Departments" ToRole="DepartmentEmployee" />
+          <NavigationProperty Name="Division" Relationship="Self.FK__Departmen__Divis__5BE2A6F2" FromRole="Departments" ToRole="Divisions" />
+          <NavigationProperty Name="PerformanceInitiatives" Relationship="Self.FK__Performan__DeptI__60A75C0F" FromRole="Departments" ToRole="PerformanceInitiative" />
+          <NavigationProperty Name="TeamManagements" Relationship="Self.FK_TeamManagement_Departments" FromRole="Departments" ToRole="TeamManagement" />
+        </EntityType>
+        <EntityType Name="Division">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Division1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Departmen__Divis__5BE2A6F2" FromRole="Divisions" ToRole="Departments" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="EmployeeFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeMiddleInitial" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PeopleJobTitleId" Type="Guid" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DepartmentEmployees" Relationship="Self.FK__Departmen__Emplo__5AEE82B9" FromRole="Employee" ToRole="DepartmentEmployee" />
+          <NavigationProperty Name="JobTitle" Relationship="Self.FK__Employee__People__5CD6CB2B" FromRole="Employee" ToRole="JobTitles" />
+          <NavigationProperty Name="TeamMembers" Relationship="Self.FK__TeamMembe__Emplo__6383C8BA" FromRole="Employee" ToRole="TeamMembers" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__EmployeeI__656C112C" FromRole="Employee" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="JobTitle1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__People__5CD6CB2B" FromRole="JobTitles" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="KPI">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="StrategicObjectiveId" Type="Guid" />
+          <Property Name="KPI1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="StrategicObjective" Relationship="Self.FK_KPIs_StrategicObjectives" FromRole="KPIs" ToRole="StrategicObjectives" />
+          <NavigationProperty Name="PerformanceIndicators" Relationship="Self.FK_PerformanceIndicator_KPIs" FromRole="KPIs" ToRole="PerformanceIndicator" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="LanguageFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LanguageCultureName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PerformanceIndicator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TeamId" Type="Guid" />
+          <Property Name="KPIId" Type="Guid" />
+          <Property Name="Target" Type="Decimal" Precision="18" Scale="4" />
+          <NavigationProperty Name="KPI" Relationship="Self.FK_PerformanceIndicator_KPIs" FromRole="PerformanceIndicator" ToRole="KPIs" />
+          <NavigationProperty Name="TeamManagement" Relationship="Self.FK_PerformanceIndicator_TeamManagement" FromRole="PerformanceIndicator" ToRole="TeamManagement" />
+        </EntityType>
+        <EntityType Name="PerformanceInitiative">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DeptId" Type="Guid" />
+          <Property Name="PerformanceInitiativeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Performan__DeptI__60A75C0F" FromRole="PerformanceInitiative" ToRole="Departments" />
+          <NavigationProperty Name="StrategicObjectives" Relationship="Self.FK__Strategic__Perfo__619B8048" FromRole="PerformanceInitiative" ToRole="StrategicObjectives" />
+        </EntityType>
+        <EntityType Name="StrategicObjective">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PerformanceInitiativeId" Type="Guid" />
+          <Property Name="StrategicObjectives" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KPIs" Relationship="Self.FK_KPIs_StrategicObjectives" FromRole="StrategicObjectives" ToRole="KPIs" />
+          <NavigationProperty Name="PerformanceInitiative" Relationship="Self.FK__Strategic__Perfo__619B8048" FromRole="StrategicObjectives" ToRole="PerformanceInitiative" />
+        </EntityType>
+        <EntityType Name="Target">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TeamId" Type="Guid" />
+          <Property Name="KPIID" Type="Guid" />
+          <Property Name="Target1" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="UOMId" Type="Guid" />
+        </EntityType>
+        <EntityType Name="TeamManagement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TeamName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_TeamManagement_Departments" FromRole="TeamManagement" ToRole="Departments" />
+          <NavigationProperty Name="PerformanceIndicators" Relationship="Self.FK_PerformanceIndicator_TeamManagement" FromRole="TeamManagement" ToRole="PerformanceIndicator" />
+          <NavigationProperty Name="TeamMembers" Relationship="Self.FK__TeamMembe__TeamI__6477ECF3" FromRole="TeamManagement" ToRole="TeamMembers" />
+        </EntityType>
+        <EntityType Name="TeamMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TeamId" Type="Guid" />
+          <Property Name="EmployeeId" Type="Guid" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__TeamMembe__Emplo__6383C8BA" FromRole="TeamMembers" ToRole="Employee" />
+          <NavigationProperty Name="TeamManagement" Relationship="Self.FK__TeamMembe__TeamI__6477ECF3" FromRole="TeamMembers" ToRole="TeamManagement" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepartmentId" Type="Guid" />
+          <Property Name="TeamName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UOM1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__66603565" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="EmployeeId" Type="Guid" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UserFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LanguageId" Type="Guid" />
+          <Property Name="RoleId" Type="Guid" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Users__EmployeeI__656C112C" FromRole="Users" ToRole="Employee" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK__Users__RoleId__66603565" FromRole="Users" ToRole="UserRoles" />
+        </EntityType>
+        <Association Name="FK__Departmen__Depar__59FA5E80">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="DepartmentEmployee" Type="Self.DepartmentEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentEmployee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Emplo__5AEE82B9">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="DepartmentEmployee" Type="Self.DepartmentEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Divis__5BE2A6F2">
+          <End Role="Divisions" Type="Self.Division" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="DivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Performan__DeptI__60A75C0F">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="PerformanceInitiative" Type="Self.PerformanceInitiative" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PerformanceInitiative">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamManagement_Departments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="TeamManagement" Type="Self.TeamManagement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamManagement">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__People__5CD6CB2B">
+          <End Role="JobTitles" Type="Self.JobTitle" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="PeopleJobTitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeamMembe__Emplo__6383C8BA">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="TeamMembers" Type="Self.TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMembers">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__EmployeeI__656C112C">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KPIs_StrategicObjectives">
+          <End Role="StrategicObjectives" Type="Self.StrategicObjective" Multiplicity="0..1" />
+          <End Role="KPIs" Type="Self.KPI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StrategicObjectives">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KPIs">
+              <PropertyRef Name="StrategicObjectiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerformanceIndicator_KPIs">
+          <End Role="KPIs" Type="Self.KPI" Multiplicity="0..1" />
+          <End Role="PerformanceIndicator" Type="Self.PerformanceIndicator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KPIs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PerformanceIndicator">
+              <PropertyRef Name="KPIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerformanceIndicator_TeamManagement">
+          <End Role="TeamManagement" Type="Self.TeamManagement" Multiplicity="0..1" />
+          <End Role="PerformanceIndicator" Type="Self.PerformanceIndicator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamManagement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PerformanceIndicator">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Strategic__Perfo__619B8048">
+          <End Role="PerformanceInitiative" Type="Self.PerformanceInitiative" Multiplicity="0..1" />
+          <End Role="StrategicObjectives" Type="Self.StrategicObjective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PerformanceInitiative">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StrategicObjectives">
+              <PropertyRef Name="PerformanceInitiativeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeamMembe__TeamI__6477ECF3">
+          <End Role="TeamManagement" Type="Self.TeamManagement" Multiplicity="0..1" />
+          <End Role="TeamMembers" Type="Self.TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamManagement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMembers">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__66603565">
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpotlightEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="DailyKPITransactions" EntityType="Self.DailyKPITransaction" />
+          <EntitySet Name="DepartmentEmployees" EntityType="Self.DepartmentEmployee" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Divisions" EntityType="Self.Division" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="JobTitles" EntityType="Self.JobTitle" />
+          <EntitySet Name="KPIs" EntityType="Self.KPI" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="PerformanceIndicators" EntityType="Self.PerformanceIndicator" />
+          <EntitySet Name="PerformanceInitiatives" EntityType="Self.PerformanceInitiative" />
+          <EntitySet Name="StrategicObjectives" EntityType="Self.StrategicObjective" />
+          <EntitySet Name="Targets" EntityType="Self.Target" />
+          <EntitySet Name="TeamManagements" EntityType="Self.TeamManagement" />
+          <EntitySet Name="TeamMembers" EntityType="Self.TeamMember" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <EntitySet Name="UOMs" EntityType="Self.UOM" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Departmen__Depar__59FA5E80" Association="Self.FK__Departmen__Depar__59FA5E80">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="DepartmentEmployee" EntitySet="DepartmentEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Emplo__5AEE82B9" Association="Self.FK__Departmen__Emplo__5AEE82B9">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="DepartmentEmployee" EntitySet="DepartmentEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Divis__5BE2A6F2" Association="Self.FK__Departmen__Divis__5BE2A6F2">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Performan__DeptI__60A75C0F" Association="Self.FK__Performan__DeptI__60A75C0F">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="PerformanceInitiative" EntitySet="PerformanceInitiatives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamManagement_Departments" Association="Self.FK_TeamManagement_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="TeamManagement" EntitySet="TeamManagements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__People__5CD6CB2B" Association="Self.FK__Employee__People__5CD6CB2B">
+            <End Role="JobTitles" EntitySet="JobTitles" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamMembe__Emplo__6383C8BA" Association="Self.FK__TeamMembe__Emplo__6383C8BA">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__EmployeeI__656C112C" Association="Self.FK__Users__EmployeeI__656C112C">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KPIs_StrategicObjectives" Association="Self.FK_KPIs_StrategicObjectives">
+            <End Role="StrategicObjectives" EntitySet="StrategicObjectives" />
+            <End Role="KPIs" EntitySet="KPIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerformanceIndicator_KPIs" Association="Self.FK_PerformanceIndicator_KPIs">
+            <End Role="KPIs" EntitySet="KPIs" />
+            <End Role="PerformanceIndicator" EntitySet="PerformanceIndicators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerformanceIndicator_TeamManagement" Association="Self.FK_PerformanceIndicator_TeamManagement">
+            <End Role="TeamManagement" EntitySet="TeamManagements" />
+            <End Role="PerformanceIndicator" EntitySet="PerformanceIndicators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Strategic__Perfo__619B8048" Association="Self.FK__Strategic__Perfo__619B8048">
+            <End Role="PerformanceInitiative" EntitySet="PerformanceInitiatives" />
+            <End Role="StrategicObjectives" EntitySet="StrategicObjectives" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamMembe__TeamI__6477ECF3" Association="Self.FK__TeamMembe__TeamI__6477ECF3">
+            <End Role="TeamManagement" EntitySet="TeamManagements" />
+            <End Role="TeamMembers" EntitySet="TeamMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__66603565" Association="Self.FK__Users__RoleId__66603565">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpotlightModelStoreContainer" CdmEntityContainer="SpotlightEntities">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="SpotlightModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyAddressLine" ColumnName="CompanyAddressLine" />
+                <ScalarProperty Name="CompanyCity" ColumnName="CompanyCity" />
+                <ScalarProperty Name="CompanyProvinceId" ColumnName="CompanyProvinceId" />
+                <ScalarProperty Name="CompanyPostalCode" ColumnName="CompanyPostalCode" />
+                <ScalarProperty Name="CompanyPhone" ColumnName="CompanyPhone" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="SpendingAmountBalance" ColumnName="SpendingAmountBalance" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyKPITransactions">
+            <EntityTypeMapping TypeName="SpotlightModel.DailyKPITransaction">
+              <MappingFragment StoreEntitySet="DailyKPITransaction">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransDate" ColumnName="TransDate" />
+                <ScalarProperty Name="KPIID" ColumnName="KPIID" />
+                <ScalarProperty Name="PerformanceNumber" ColumnName="PerformanceNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentEmployees">
+            <EntityTypeMapping TypeName="SpotlightModel.DepartmentEmployee">
+              <MappingFragment StoreEntitySet="DepartmentEmployee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="SpotlightModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+                <ScalarProperty Name="Department1" ColumnName="Department" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Divisions">
+            <EntityTypeMapping TypeName="SpotlightModel.Division">
+              <MappingFragment StoreEntitySet="Divisions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Division1" ColumnName="Division" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="SpotlightModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+                <ScalarProperty Name="EmployeeMiddleInitial" ColumnName="EmployeeMiddleInitial" />
+                <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+                <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
+                <ScalarProperty Name="PeopleJobTitleId" ColumnName="PeopleJobTitleId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTitles">
+            <EntityTypeMapping TypeName="SpotlightModel.JobTitle">
+              <MappingFragment StoreEntitySet="JobTitles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="JobTitle1" ColumnName="JobTitle" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KPIs">
+            <EntityTypeMapping TypeName="SpotlightModel.KPI">
+              <MappingFragment StoreEntitySet="KPIs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StrategicObjectiveId" ColumnName="StrategicObjectiveId" />
+                <ScalarProperty Name="KPI1" ColumnName="KPI" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="SpotlightModel.Language">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LanguageFullName" ColumnName="LanguageFullName" />
+                <ScalarProperty Name="LanguageCultureName" ColumnName="LanguageCultureName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerformanceIndicators">
+            <EntityTypeMapping TypeName="SpotlightModel.PerformanceIndicator">
+              <MappingFragment StoreEntitySet="PerformanceIndicator">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="KPIId" ColumnName="KPIId" />
+                <ScalarProperty Name="Target" ColumnName="Target" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerformanceInitiatives">
+            <EntityTypeMapping TypeName="SpotlightModel.PerformanceInitiative">
+              <MappingFragment StoreEntitySet="PerformanceInitiative">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="PerformanceInitiativeName" ColumnName="PerformanceInitiativeName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StrategicObjectives">
+            <EntityTypeMapping TypeName="SpotlightModel.StrategicObjective">
+              <MappingFragment StoreEntitySet="StrategicObjectives">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PerformanceInitiativeId" ColumnName="PerformanceInitiativeId" />
+                <ScalarProperty Name="StrategicObjectives" ColumnName="StrategicObjectives" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Targets">
+            <EntityTypeMapping TypeName="SpotlightModel.Target">
+              <MappingFragment StoreEntitySet="Targets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="KPIID" ColumnName="KPIID" />
+                <ScalarProperty Name="Target1" ColumnName="Target" />
+                <ScalarProperty Name="UOMId" ColumnName="UOMId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamManagements">
+            <EntityTypeMapping TypeName="SpotlightModel.TeamManagement">
+              <MappingFragment StoreEntitySet="TeamManagement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamMembers">
+            <EntityTypeMapping TypeName="SpotlightModel.TeamMember">
+              <MappingFragment StoreEntitySet="TeamMembers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="SpotlightModel.Team">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UOMs">
+            <EntityTypeMapping TypeName="SpotlightModel.UOM">
+              <MappingFragment StoreEntitySet="UOMs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UOM1" ColumnName="UOM" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="SpotlightModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SpotlightModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

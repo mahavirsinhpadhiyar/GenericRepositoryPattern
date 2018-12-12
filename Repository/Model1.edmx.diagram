@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="48c7bda2f2cb4b5dbcc25154b74447f7" Name="Diagram1">
+        <EntityTypeShape EntityType="SpotlightModel.Company" Width="1.5" PointX="10.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.DailyKPITransaction" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.DepartmentEmployee" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.Department" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.Division" Width="1.5" PointX="1.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.Employee" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.JobTitle" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.KPI" Width="1.5" PointX="7.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.Language" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.PerformanceIndicator" Width="1.5" PointX="9.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.PerformanceInitiative" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.StrategicObjective" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.Target" Width="1.5" PointX="10.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.TeamManagement" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.TeamMember" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.Team" Width="1.5" PointX="4.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.UOM" Width="1.5" PointX="6.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.UserRole" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpotlightModel.User" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="SpotlightModel.FK__Departmen__Depar__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__Departmen__Emplo__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__Departmen__Divis__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__Performan__DeptI__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK_TeamManagement_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__Employee__People__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__TeamMembe__Emplo__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__Users__EmployeeI__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK_KPIs_StrategicObjectives" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK_PerformanceIndicator_KPIs" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK_PerformanceIndicator_TeamManagement" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__Strategic__Perfo__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__TeamMembe__TeamI__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="SpotlightModel.FK__Users__RoleId__66603565" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
