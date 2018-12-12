@@ -11,9 +11,6 @@ namespace Repository
     {
         static void Main(string[] args)
         {
-
-
-
             Task.Run(async () =>
             {
                 DataRepository<Department> department = new DataRepository<Department>();
