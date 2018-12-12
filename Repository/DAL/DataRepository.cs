@@ -66,8 +66,8 @@ namespace Repository.DAL
         /// <summary>
         /// Example how to use this method
         /// await department.GetQueryDataAsync<dynamic>(i => i.Department1.StartsWith("Department"),
-        ///                                                                                         i => new { i.Id, i.Department1, i.IsActive, i.Division.Division1 },
-        ///                                                                                         i =>  new { i.Department1, i.Division.Division1 }, true, i =>i.Division);
+        ///   i => new { i.Id, i.Department1, i.IsActive, i.Division.Division1 },
+        ///   i =>  new { i.Department1, i.Division.Division1 }, true, i =>i.Division);
         /// </summary>
         /// <typeparam name="TReturn">specify the type of object which this method will return</typeparam>
         /// <param name="whereExp">Where condition</param>
@@ -84,18 +84,27 @@ namespace Repository.DAL
         {
             using (var context = new SpotlightEntities())
             {
-                var query = context.Set<T>().Where(whereExp);
+                IQueryable<T> query = context.Set<T>();
 
-                if (descending.HasValue)
-                    query = descending.Value ? query.OrderByDescending(orderExp) : query.OrderBy(orderExp);
-                else
+                if (whereExp != null)
                 {
-                    if (orderExp != null)
-                        query = query.OrderBy(orderExp);
+                    query = query.Where(whereExp);
                 }
 
-                if (includeExps != null)
-                    query = includeExps.Aggregate(query, (current, exp) => current.Include(exp));
+                if (orderExp != null)
+                {
+                    if (descending.HasValue)
+                    {
+                        query = descending.Value ? query.OrderByDescending(orderExp) : query.OrderBy(orderExp);
+                    }
+                    else
+                    {
+                        query = query.OrderBy(orderExp);
+                    }
+                }
+
+                foreach (Expression<Func<T, object>> navigationProperty in includeExps)
+                    query = query.Include<T, object>(navigationProperty);
 
                 return await query.Select(selectExp).ToListAsync();
             }
@@ -119,14 +128,23 @@ namespace Repository.DAL
         {
             using (var context = new SpotlightEntities())
             {
-                var query = context.Set<T>().Where(whereExp);
+                IQueryable<T> query = context.Set<T>();
 
-                if (descending.HasValue)
-                    query = descending.Value ? query.OrderByDescending(orderExp) : query.OrderBy(orderExp);
-                else
+                if (whereExp != null)
                 {
-                    if (orderExp != null)
+                    query = query.Where(whereExp);
+                }
+
+                if (orderExp != null)
+                {
+                    if (descending.HasValue)
+                    {
+                        query = descending.Value ? query.OrderByDescending(orderExp) : query.OrderBy(orderExp);
+                    }
+                    else
+                    {
                         query = query.OrderBy(orderExp);
+                    }
                 }
 
                 if (includeExps != null)
@@ -139,9 +157,8 @@ namespace Repository.DAL
         /// <summary>
         /// Gets all records in table
         /// </summary>
-        /// <param name="navigationProperties"></param>
         /// <returns></returns>
-        public async Task<IList<T>> GetAllAsync(params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
+        public async Task<IList<T>> GetAllAsync()
         {
             using (var context = new SpotlightEntities())
             {
@@ -152,18 +169,20 @@ namespace Repository.DAL
         }
 
         /// <summary>
-        /// Remove single record
+        /// Gets all records in table with foreign table data
         /// </summary>
-        /// <param name="item">record to be removed</param>
-        /// <returns>returns true if record gets added successfully else false</returns>
-        public async Task<bool> RemoveAsync(T item)
+        /// <param name="navigationProperties">Include eager loading to get foreign table data</param>
+        /// <returns></returns>
+        public async Task<IList<T>> GetAllAsync(params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             using (var context = new SpotlightEntities())
             {
-                context.Entry(item).State = EntityState.Deleted;
-                var count = await context.SaveChangesAsync();
+                IQueryable<T> dbQuery = context.Set<T>();
 
-                return count == 1;
+                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
+
+                return await dbQuery.AsNoTracking().ToListAsync<T>();
             }
         }
 
