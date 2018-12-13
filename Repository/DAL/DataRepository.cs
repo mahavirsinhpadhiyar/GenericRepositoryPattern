@@ -33,10 +33,23 @@ namespace Repository.DAL
         {
             using (var context = new SpotlightEntities())
             {
-                foreach (var item in items)
-                    context.Entry(item).State = EntityState.Added;
+                using (DbContextTransaction transaction = context.Database.BeginTransaction())
+                {
+                    foreach (var item in items)
+                        context.Entry(item).State = EntityState.Added;
 
-                return await context.SaveChangesAsync() == items.Count();
+                    var Result = await context.SaveChangesAsync() == items.Count();
+                    if (Result)
+                    {
+                        transaction.Commit();
+                        return true;
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
             }
         }
 
@@ -229,11 +242,23 @@ namespace Repository.DAL
         {
             using (var context = new SpotlightEntities())
             {
-                foreach (var item in items)
-                    context.Entry(item).State = EntityState.Deleted;
-                var count = await context.SaveChangesAsync();
+                using (DbContextTransaction transaction = context.Database.BeginTransaction())
+                {
+                    foreach (var item in items)
+                        context.Entry(item).State = EntityState.Deleted;
+                    var count = await context.SaveChangesAsync();
 
-                return count == items.Count();
+                    if (count == items.Count())
+                    {
+                        transaction.Commit();
+                        return true;
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
             }
         }
 
