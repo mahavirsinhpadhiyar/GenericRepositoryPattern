@@ -286,10 +286,24 @@ namespace Repository.DAL
         {
             using (var context = new SpotlightEntities())
             {
-                foreach (var item in items)
-                    context.Entry(item).State = EntityState.Modified;
+                using (DbContextTransaction transaction = context.Database.BeginTransaction())
+                {
+                    foreach (var item in items)
+                        context.Entry(item).State = EntityState.Modified;
 
-                return await context.SaveChangesAsync() == items.Count();
+                    var result = await context.SaveChangesAsync() == items.Count();
+
+                    if (result)
+                    {
+                        transaction.Commit();
+                        return true;
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
             }
         }
     }
