@@ -13,10 +13,10 @@ namespace Repository
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SpotlightEntities : DbContext
+    public partial class StudentMasterEntities : DbContext
     {
-        public SpotlightEntities()
-            : base("name=SpotlightEntities")
+        public StudentMasterEntities()
+            : base("name=StudentMasterEntities")
         {
         }
     
@@ -25,24 +25,9 @@ namespace Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<DailyKPITransaction> DailyKPITransactions { get; set; }
-        public virtual DbSet<DepartmentEmployee> DepartmentEmployees { get; set; }
-        public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Division> Divisions { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<JobTitle> JobTitles { get; set; }
-        public virtual DbSet<KPI> KPIs { get; set; }
-        public virtual DbSet<Language> Languages { get; set; }
-        public virtual DbSet<PerformanceIndicator> PerformanceIndicators { get; set; }
-        public virtual DbSet<PerformanceInitiative> PerformanceInitiatives { get; set; }
-        public virtual DbSet<StrategicObjective> StrategicObjectives { get; set; }
-        public virtual DbSet<Target> Targets { get; set; }
-        public virtual DbSet<TeamManagement> TeamManagements { get; set; }
-        public virtual DbSet<TeamMember> TeamMembers { get; set; }
-        public virtual DbSet<Team> Teams { get; set; }
-        public virtual DbSet<UOM> UOMs { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Registration> Registrations { get; set; }
+        public virtual DbSet<State> States { get; set; }
     }
 }

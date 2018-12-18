@@ -1,8 +1,5 @@
 ﻿using Repository.DAL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -14,17 +11,17 @@ namespace Repository
             //Test demo
             Task.Run(async () =>
             {
-                DataRepository<Department> department = new DataRepository<Department>();
+                DataRepository<Country> country = new DataRepository<Country>();
 
-                DataRepository<Division> divisionRepository = new DataRepository<Division>();
+                DataRepository<State> state = new DataRepository<State>();
 
-                var divisionListData = await divisionRepository.GetQueryDataAsync(d => d.IsActive == true);
+                var stateListData = await state.GetAllAsync();
 
-                var departments = await department.FirstOrDefaultAsync(i => i.Department1.StartsWith("Department"), i => i.Division, i => i.Division);
+                var countries = await country.FirstOrDefaultAsync(i => i.CountryName.StartsWith("India"), i => i.States);
 
-                var result = await department.GetQueryDataAsync<dynamic>(i => i.Department1.StartsWith("Department"),
-                                                                                                            i => new { i.Id, i.Department1, i.IsActive, i.Division.Division1 }, 
-                                                                                                            i =>  new { i.Department1, i.Division.Division1 }, true, i =>i.Division);
+                var result = await state.GetQueryDataAsync<dynamic>(i => i.StateName.StartsWith("Delhi"),
+                                                                                                            i => new { i.StateId, i.StateName, i.Country.CountryName }, 
+                                                                                                            i =>  new { i.StateId, i.Country.CountryName }, true, i =>i.Cities);
 
                 Console.ReadLine();
             });

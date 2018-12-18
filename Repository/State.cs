@@ -12,21 +12,20 @@ namespace Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class PerformanceInitiative
+    public partial class State
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PerformanceInitiative()
+        public State()
         {
-            this.StrategicObjectives = new HashSet<StrategicObjective>();
+            this.Cities = new HashSet<City>();
         }
     
-        public System.Guid Id { get; set; }
-        public Nullable<System.Guid> DeptId { get; set; }
-        public string PerformanceInitiativeName { get; set; }
-        public bool IsActive { get; set; }
+        public int StateId { get; set; }
+        public string StateName { get; set; }
+        public Nullable<int> CountryId { get; set; }
     
-        public virtual Department Department { get; set; }
+        public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StrategicObjective> StrategicObjectives { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
     }
 }
