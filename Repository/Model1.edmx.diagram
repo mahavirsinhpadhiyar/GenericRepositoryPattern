@@ -7,7 +7,6 @@
       <Diagram DiagramId="9721b0a6203944e3aecb34dd29c0bf20" Name="Diagram1">
         <EntityTypeShape EntityType="StudentMasterModel.City" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentMasterModel.Country" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudentMasterModel.Registration" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentMasterModel.State" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="StudentMasterModel.FK_State_Country" />
         <AssociationConnector Association="StudentMasterModel.FK_City_State" />
