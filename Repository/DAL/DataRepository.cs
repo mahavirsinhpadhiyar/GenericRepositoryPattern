@@ -89,7 +89,7 @@ namespace Repository.DAL
         /// <param name="descending">default is ascending. if result needed in descending order then pass true in this argument</param>
         /// <param name="includeExps">foreign key fields which needs to be populated</param>
         /// <returns>returns object of type TReturn</returns>
-        public async Task<IList<TReturn>> GetQueryDataAsync<TReturn>(Expression<Func<T, bool>> whereExp,
+        public async Task<List<TReturn>> GetQueryDataAsync<TReturn>(Expression<Func<T, bool>> whereExp,
                                                                Expression<Func<T, TReturn>> selectExp,
                                                                Expression<Func<T, TReturn>> orderExp = null,
                                                                bool? descending = null,
@@ -134,7 +134,7 @@ namespace Repository.DAL
         /// <param name="descending">default is ascending. if result needed in descending order then pass true in this argument</param>
         /// <param name="includeExps">foreign key fields which needs to be populated</param>
         /// <returns>returns object of type T</returns>
-        public async Task<IList<T>> GetQueryDataAsync(Expression<Func<T, bool>> whereExp,
+        public async Task<List<T>> GetQueryDataAsync(Expression<Func<T, bool>> whereExp,
                                                                Expression<Func<T, object>> orderExp = null,
                                                                bool? descending = null,
                                                                params Expression<Func<T, object>>[] includeExps)
@@ -171,7 +171,7 @@ namespace Repository.DAL
         /// Gets all records in table
         /// </summary>
         /// <returns></returns>
-        public async Task<IList<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync()
         {
             using (var context = new SpotlightEntities())
             {
@@ -186,7 +186,7 @@ namespace Repository.DAL
         /// </summary>
         /// <param name="navigationProperties">Include eager loading to get foreign table data</param>
         /// <returns></returns>
-        public async Task<IList<T>> GetAllAsync(params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
+        public async Task<List<T>> GetAllAsync(params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             using (var context = new SpotlightEntities())
             {
@@ -212,24 +212,6 @@ namespace Repository.DAL
                 var count = await context.SaveChangesAsync();
 
                 return count == 1;
-            }
-        }
-
-        /// <summary>
-        /// Example how to use this method
-        /// await department.GetQueryDataAsync(i => i.Id == Id);
-        /// </summary>
-        /// <returns>Rertuns </returns>
-        public async Task<bool> RemoveAsync(Expression<Func<T, bool>> whereExp)
-        {
-            using (var context = new SpotlightEntities())
-            {
-                var item = context.Set<T>().FirstOrDefault(whereExp);
-
-                context.Entry(item).State = EntityState.Deleted;
-                var count = await context.SaveChangesAsync();
-
-                return count > 0;
             }
         }
 
