@@ -38,8 +38,3 @@ Send us your request or change in existing code and show us we will allow you to
 
  - RemoveAsync using primary key only.
  - Join over multiple foreign key / related tables.
-
-License
-----
-
-MIT
