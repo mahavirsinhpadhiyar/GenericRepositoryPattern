@@ -28,10 +28,6 @@ Following are the packages which are used in current app:
 * [Linq.Expressions] - Linq expressions used to assign dynamic expressions as parameters. 
 * [Threading.Tasks] - (Task, await and async) Task can represent any result that will be available in the future (general), not just a computation. This is especially important with async-await, which uses Tasks for asynchronous operations. Since the operation that gets the result might fail, Tasks can also represent failures..
 
-### Installation
-
-Your application requires [Node.js](https://nodejs.org/) v4+ to run.
-
 ### Development
 
 Want to contribute? Great!
