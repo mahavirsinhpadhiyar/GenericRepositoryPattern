@@ -1,7 +1,5 @@
 # GRP (Generic Repository Pattern)
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 GRP is Generic Repository Pattern which is useful for database operation with any kind of ORM system.
 
 Currently it has following methods which you can use for database operations:
