@@ -1,6 +1,6 @@
-# GRP (Generic Repository Pattern)
+# GRP (Generic Repository Pattern) using Database First
 
-GRP is Generic Repository Pattern which is useful for database operation with any kind of ORM system.
+GRP is Generic Repository Pattern which is useful for database operation with any kind of ORM system using database first approach.
 
 Currently it has following methods which you can use for database operations:
 
